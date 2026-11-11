@@ -1,0 +1,32 @@
+# Dependências e builds
+node_modules
+.next
+out
+build
+.pnpm-store
+
+# Ambiente
+.env
+.env.local
+.env*.local
+!.env.example
+
+# Ferramentas baixadas localmente (não fazem parte do projeto)
+tools/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# TypeScript / editor
+next-env.d.ts
+tsconfig.tsbuildinfo
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Rascunhos de verificação
+scripts/shots/
+scripts/_*.png

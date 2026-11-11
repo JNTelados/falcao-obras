@@ -1,0 +1,36 @@
+{
+  "name": "falcao-obras-remodelacoes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional da Falcão Obras & Remodelações — gás, águas e esgotos, remodelações e pinturas.",
+  "scripts": {
+    "dev": "next dev -p 3210",
+    "build": "next build",
+    "build:static": "node scripts/build-static.mjs",
+    "start": "next start -p 3210",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "verify:layout": "node scripts/diagnose2.mjs",
+    "verify:i18n": "node scripts/check-lang.mjs",
+    "assets:logo": "python scripts/build_logo_assets.py",
+    "assets:og": "python scripts/build_og_image.py"
+  },
+  "dependencies": {
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.469.0",
+    "next": "15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "^10.4.20",
+    "playwright-core": "^1.65.0",
+    "postcss": "^8.4.49",
+    "serve": "^14.2.7",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}

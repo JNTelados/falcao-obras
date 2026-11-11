@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+    color-scheme: light;
+  }
+
+  * {
+    @apply border-graphite-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Elementos decorativos usam offsets negativos (bleed); sem isto, o body
+     ganha ~4px de scroll horizontal em ecrãs pequenos. */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-graphite-700 antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+  }
+
+  /* Foco visível e consistente em todo o site */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-canvas;
+  }
+
+  ::selection {
+    @apply bg-gold-400/30 text-graphite-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  /* Barra de scroll discreta */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-graphite-100;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full border-[3px] border-solid border-graphite-100 bg-graphite-400;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-graphite-500;
+  }
+}
+
+@layer components {
+  /* Etiqueta superior padrão das secções */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-2xs font-bold uppercase tracking-[0.24em] text-gold-600;
+  }
+
+  /* Superfície escura reutilizável */
+  .surface-dark {
+    @apply bg-graphite-950 text-graphite-300;
+  }
+
+  /* Grade decorativa de fundo (classe única — evita duplicar gradientes no CSS) */
+  .bg-technical-grid {
+    @apply pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(16,18,22,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,18,22,0.035)_1px,transparent_1px)] bg-[size:64px_64px];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Respeita quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

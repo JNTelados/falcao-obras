@@ -1,0 +1,6 @@
+# Configuração do workspace pnpm (pnpm 11 lê as settings daqui, não do package.json).
+# `sharp` é usado pelo next/image para otimizar imagens; o binário pré-compilado
+# @img/sharp-win32-x64 já vem no install, por isso o script de build é dispensável.
+verifyDepsBeforeRun: false
+onlyBuiltDependencies:
+  - sharp
