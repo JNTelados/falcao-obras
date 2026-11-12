@@ -1,5 +1,6 @@
-# Configuração de publicação automática na Netlify.
-# Cada push no repositório gera e publica o site sozinho — sem arrastar pastas.
+# Configuracao de publicacao automatica na Netlify.
+# Cada push no repositorio gera e publica o site sozinho - sem arrastar pastas.
+# (Texto apenas em ASCII para evitar problemas de codificacao.)
 
 [build]
   command = "pnpm build:static"
@@ -7,28 +8,32 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  # pnpm é ativado via corepack (evita falha de "pnpm: command not found")
+  # pnpm e ativado via corepack (evita falha de "pnpm: command not found")
   NETLIFY_USE_PNPM = "true"
-  # Domínio próprio (canonical, Open Graph, sitemap)
+  # Dominio proprio (canonical, Open Graph, sitemap)
   NEXT_PUBLIC_SITE_URL = "https://www.falcaoobras.pt"
 
-# NOTA IMPORTANTE sobre o redirecionamento www:
-# NÃO criar aqui uma regra de redirect para o www. A Netlify já redireciona
-# automaticamente todos os domínios secundários para o domínio principal
-# definido no painel (Domain management -> Set as primary). Se juntarmos uma
-# regra nossa apontando para o lado oposto, o resultado é um CICLO infinito
-# de redirecionamentos (o site deixa de abrir).
+# ---------------------------------------------------------------------
+#  ATENCAO: nao criar aqui uma regra de redirect para o www.
 #
-# Para o endereço canónico ser o www, basta definir
-# "www.falcaoobras.pt" como PRIMARY DOMAIN no painel da Netlify.
+#  A Netlify ja redireciona automaticamente todos os dominios secundarios
+#  para o dominio principal definido no painel
+#  (Domain management -> ... -> Set as primary).
+#
+#  Se adicionarmos uma regra nossa apontando para o lado oposto, o
+#  resultado e um CICLO infinito de redirecionamentos e o site nao abre.
+#
+#  Para o endereco canonico ser o www, defina
+#  "www.falcaoobras.pt" como PRIMARY DOMAIN no painel da Netlify.
+# ---------------------------------------------------------------------
 
-# Cabeçalhos: os ficheiros do Next.js têm hash no nome, cache para sempre.
+# Ficheiros do Next.js tem hash no nome: podem ser cacheados para sempre.
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Imagens e ícones da marca mudam pouco: cache longa.
+# Imagens e icones da marca mudam pouco: cache longa.
 [[headers]]
   for = "/brand/*"
   [headers.values]
@@ -39,7 +44,7 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-# Cabeçalhos de segurança no site publicado.
+# Cabecalhos de seguranca no site publicado.
 [[headers]]
   for = "/*"
   [headers.values]
