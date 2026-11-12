@@ -28,7 +28,7 @@ export function Contact() {
         />
 
         <div className="mt-14 grid gap-6 lg:grid-cols-12">
-          {/* FormulÃ¡rio */}
+          {/* Formulário */}
           <Reveal
             className="lg:col-span-7"
             variants={{
@@ -39,7 +39,7 @@ export function Contact() {
             <ContactForm />
           </Reveal>
 
-          {/* InformaÃ§Ãµes de contato */}
+          {/* Informações de contato */}
           <Reveal
             className="flex flex-col gap-5 lg:col-span-5"
             delay={0.1}
@@ -48,7 +48,7 @@ export function Contact() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
             }}
           >
-            {/* Bloco escuro com os telefones â€” destaque principal */}
+            {/* Bloco escuro com os telefones — destaque principal */}
             <div className="relative overflow-hidden rounded-4xl bg-graphite-950 p-7 shadow-lift">
               <div
                 aria-hidden="true"
@@ -101,7 +101,7 @@ export function Contact() {
               </div>
             </div>
 
-            {/* CartÃµes auxiliares */}
+            {/* Cartões auxiliares */}
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl border border-graphite-200/70 bg-white p-5 shadow-soft">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gold-50 text-gold-600 ring-1 ring-gold-200/70">
@@ -110,7 +110,7 @@ export function Contact() {
                 <p className="mt-4 text-sm font-semibold text-graphite-950">
                   {t.contact.responseTime}
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-graphite-500">{t.location.weekdays} Â· 08:00 â€” 19:00</p>
+                <p className="mt-1 text-xs leading-relaxed text-graphite-500">{t.location.weekdays} · 08:00 — 19:00</p>
               </div>
 
               <div className="rounded-3xl border border-graphite-200/70 bg-white p-5 shadow-soft">
@@ -165,7 +165,7 @@ export function Contact() {
               <div className="flex items-center gap-3 rounded-3xl border border-graphite-200/70 bg-white px-5 py-4 shadow-soft sm:col-span-2">
                 <Clock className="h-4.5 w-4.5 shrink-0 text-gold-500" aria-hidden="true" />
                 <p className="text-xs leading-relaxed text-graphite-600">
-                  {t.location.weekdays}: 08:00 â€” 19:00 Â· {t.location.saturday}: 09:00 â€” 14:00 Â·{' '}
+                  {t.location.weekdays}: 08:00 — 19:00 · {t.location.saturday}: 09:00 — 14:00 ·{' '}
                   {t.location.sunday}: {t.services.items.emergencia.title}
                 </p>
               </div>

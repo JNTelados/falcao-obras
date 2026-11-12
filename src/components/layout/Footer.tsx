@@ -61,7 +61,7 @@ export function Footer() {
               {t.footer.about}
             </p>
             <p className="mt-4 font-display text-sm italic text-gold-300">
-              â€œ{COMPANY.tagline}â€
+              “{COMPANY.tagline}”
             </p>
             <div className="mt-6 flex items-center gap-2.5">
               {SOCIALS.map(({ label, href, Icon }) => (
@@ -79,7 +79,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* NavegaÃ§Ã£o */}
+          {/* Navegação */}
           <nav aria-label={t.footer.quickLinks} className="lg:col-span-2">
             <h3 className="text-2xs font-bold uppercase tracking-[0.2em] text-white">
               {t.footer.quickLinks}
@@ -99,7 +99,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* ServiÃ§os */}
+          {/* Serviços */}
           <div className="lg:col-span-3">
             <h3 className="text-2xs font-bold uppercase tracking-[0.2em] text-white">
               {t.footer.servicesTitle}
@@ -163,9 +163,9 @@ export function Footer() {
               <li className="inline-flex items-start gap-3 text-graphite-400">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
                 <span>
-                  {t.location.weekdays}: 08:00 â€” 19:00
+                  {t.location.weekdays}: 08:00 — 19:00
                   <br />
-                  {t.location.saturday}: 09:00 â€” 14:00
+                  {t.location.saturday}: 09:00 — 14:00
                 </span>
               </li>
             </ul>
@@ -181,7 +181,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* RodapÃ© inferior */}
+        {/* Rodapé inferior */}
         <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
             <LanguageSwitcher tone="light" />

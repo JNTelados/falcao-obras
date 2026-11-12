@@ -38,7 +38,7 @@ export function Testimonials() {
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  // AvanÃ§o automÃ¡tico, pausado no hover/foco e respeitando reduced motion.
+  // Avanço automático, pausado no hover/foco e respeitando reduced motion.
   useEffect(() => {
     if (paused || reduce) return;
     const timer = window.setInterval(() => setIndex((i) => (i + 1) % total), 7000);
@@ -59,7 +59,7 @@ export function Testimonials() {
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Resumo de avaliaÃ§Ãµes */}
+          {/* Resumo de avaliações */}
           <Reveal
             as="aside"
             className="lg:col-span-4"
@@ -141,7 +141,7 @@ export function Testimonials() {
                     className="absolute inset-0 flex flex-col"
                   >
                     <p className="font-display text-lg leading-relaxed text-graphite-800 sm:text-xl">
-                      â€œ{active.quote}â€
+                      “{active.quote}”
                     </p>
                     <footer className="mt-auto flex items-center gap-4 pt-7">
                       <span
