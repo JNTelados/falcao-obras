@@ -12,15 +12,17 @@
   # Domínio próprio (canonical, Open Graph, sitemap)
   NEXT_PUBLIC_SITE_URL = "https://www.falcaoobras.pt"
 
-# Endereço canónico é o www: quem digitar sem www é encaminhado para lá
-# (evita conteúdo duplicado na indexação do Google).
-[[redirects]]
-  from = "https://falcaoobras.pt/*"
-  to = "https://www.falcaoobras.pt/:splat"
-  status = 301
-  force = true
+# NOTA IMPORTANTE sobre o redirecionamento www:
+# NÃO criar aqui uma regra de redirect para o www. A Netlify já redireciona
+# automaticamente todos os domínios secundários para o domínio principal
+# definido no painel (Domain management -> Set as primary). Se juntarmos uma
+# regra nossa apontando para o lado oposto, o resultado é um CICLO infinito
+# de redirecionamentos (o site deixa de abrir).
+#
+# Para o endereço canónico ser o www, basta definir
+# "www.falcaoobras.pt" como PRIMARY DOMAIN no painel da Netlify.
 
-# Os ficheiros do Next.js têm hash no nome: podem ser cacheados para sempre.
+# Cabeçalhos: os ficheiros do Next.js têm hash no nome, cache para sempre.
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
