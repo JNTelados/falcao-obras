@@ -8,7 +8,7 @@ export const COMPANY = {
   legalName: 'Falcão Obras & Remodelações',
   tagline: 'Olho de falcão, mão de profissional.',
   /** Endereço público do site (usado em SEO, partilha e dados estruturados). */
-  siteUrl: 'https://www.falcaoobras.pt',
+  siteUrl: 'https://falcaoobras.pt',
   email: 'geral@falcaoobras.pt',
   /** Números exibidos no site (formato nacional). */
   phones: [

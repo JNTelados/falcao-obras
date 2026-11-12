@@ -11,20 +11,20 @@
   # pnpm e ativado via corepack (evita falha de "pnpm: command not found")
   NETLIFY_USE_PNPM = "true"
   # Dominio proprio (canonical, Open Graph, sitemap)
-  NEXT_PUBLIC_SITE_URL = "https://www.falcaoobras.pt"
+  NEXT_PUBLIC_SITE_URL = "https://falcaoobras.pt"
 
 # ---------------------------------------------------------------------
-#  ATENCAO: nao criar aqui uma regra de redirect para o www.
+#  IMPORTANTE - COMO EVITAR CICLO DE REDIRECIONAMENTOS
 #
-#  A Netlify ja redireciona automaticamente todos os dominios secundarios
-#  para o dominio principal definido no painel
-#  (Domain management -> ... -> Set as primary).
+#  1. NAO adicionar aqui nenhuma regra de redirect entre falcaoobras.pt e
+#     www.falcaoobras.pt. A Netlify ja trata disso sozinha.
 #
-#  Se adicionarmos uma regra nossa apontando para o lado oposto, o
-#  resultado e um CICLO infinito de redirecionamentos e o site nao abre.
+#  2. No painel da Netlify, em Domain management, deixe APENAS UM dominio:
+#        falcaoobras.pt          <- recomendado (mais curto)
+#     Remova o "www.falcaoobras.pt" da lista.
 #
-#  Para o endereco canonico ser o www, defina
-#  "www.falcaoobras.pt" como PRIMARY DOMAIN no painel da Netlify.
+#  Se os dois ficarem na lista com configuracoes opostas, um manda para o
+#  outro e o site entra em ciclo infinito (nao abre em nenhum navegador).
 # ---------------------------------------------------------------------
 
 # Ficheiros do Next.js tem hash no nome: podem ser cacheados para sempre.
