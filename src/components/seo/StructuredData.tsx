@@ -20,7 +20,8 @@ export function StructuredData() {
         slogan: COMPANY.tagline,
         url,
         telephone: COMPANY.phones.map((p) => `+${p.raw}`),
-        email: COMPANY.email,
+        // Sem `email`: o contacto é apenas por telefone e WhatsApp
+        // (a caixa de correio institucional ainda não existe).
         image: `${url}/og-image.png`,
         logo: `${url}/brand/lockup-horizontal-dark.png`,
         priceRange: '€€',
