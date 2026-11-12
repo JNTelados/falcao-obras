@@ -1,8 +1,8 @@
 'use client';
 
-import { BadgeCheck, Flame, Phone, ShieldCheck } from 'lucide-react';
+import { BadgeCheck, Flame, Mail, Phone, ShieldCheck } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { COMPANY, TEAM_IDS, telHref, type TeamId } from '@/lib/site';
+import { COMPANY, TEAM_IDS, telHref, mailHref, type TeamId } from '@/lib/site';
 import { Container, Section } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
@@ -135,6 +135,13 @@ export function Team() {
                       <Phone className="h-4 w-4" aria-hidden="true" />
                     </a>
                   ))}
+                  <a
+                    href={mailHref(`Contato para ${member.name}`)}
+                    aria-label={`${t.contact.emailTitle} — ${member.name}`}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-graphite-200 text-graphite-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-300 hover:bg-gold-50 hover:text-gold-600"
+                  >
+                    <Mail className="h-4 w-4" aria-hidden="true" />
+                  </a>
                   <span className="inline-flex h-10 items-center gap-2 rounded-xl bg-graphite-50 px-3 text-2xs font-medium uppercase tracking-wider text-graphite-500">
                     <Flame className="h-3.5 w-3.5 text-flame-500" aria-hidden="true" />
                     Falcão

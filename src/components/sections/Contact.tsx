@@ -1,8 +1,8 @@
 'use client';
 
-import { Clock, MapPin, Phone, ShieldCheck, Timer } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone, ShieldCheck, Timer } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { COMPANY, telHref, whatsappHref } from '@/lib/site';
+import { COMPANY, telHref, mailHref, whatsappHref } from '@/lib/site';
 import { EASE } from '@/lib/motion';
 import { Container, Section } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -124,6 +124,25 @@ export function Contact() {
                   {t.differentials.items.garantia.text}
                 </p>
               </div>
+
+              <a
+                href={mailHref()}
+                className="group rounded-3xl border border-graphite-200/70 bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold-200 hover:shadow-card sm:col-span-2"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-graphite-100 text-graphite-700 ring-1 ring-graphite-200/80">
+                    <Mail className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-2xs font-bold uppercase tracking-[0.16em] text-graphite-500">
+                      {t.contact.emailTitle}
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-graphite-950 group-hover:text-gold-700">
+                      {COMPANY.email}
+                    </p>
+                  </div>
+                </div>
+              </a>
 
               <div className="rounded-3xl border border-graphite-200/70 bg-graphite-50 p-5 sm:col-span-2">
                 <div className="flex items-start gap-4">

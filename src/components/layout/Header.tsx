@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { MapPin, Menu, Phone, X, Clock, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Menu, Phone, X, Clock, ArrowRight } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { COMPANY, SECTION_IDS, telHref, mapsHref, whatsappHref, type SectionId } from '@/lib/site';
+import { COMPANY, SECTION_IDS, telHref, mapsHref, mailHref, whatsappHref, type SectionId } from '@/lib/site';
 import { cn, scrollToSection } from '@/lib/utils';
 import { EASE } from '@/lib/motion';
 import { Container } from '@/components/ui/Container';
@@ -102,6 +102,13 @@ export function Header() {
               >
                 <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                 {COMPANY.phones[1].display}
+              </a>
+              <a
+                href={mailHref()}
+                className="inline-flex items-center gap-2 transition-colors hover:text-gold-300"
+              >
+                <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                {COMPANY.email}
               </a>
             </div>
             <div className="flex items-center gap-5">
@@ -277,6 +284,10 @@ export function Header() {
                     {phone.display}
                   </a>
                 ))}
+                <a href={mailHref()} className="inline-flex items-center gap-2 hover:text-graphite-950">
+                  <Mail className="h-4 w-4 text-gold-500" aria-hidden="true" />
+                  {COMPANY.email}
+                </a>
               </div>
             </Container>
           </motion.div>
