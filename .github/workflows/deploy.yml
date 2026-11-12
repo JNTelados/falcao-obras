@@ -1,24 +1,69 @@
 name: Publicar site na Netlify
 
-# Publica automaticamente sempre que houver push na branch main.
-# O "build hook" abaixo e um endereco aleatorio da Netlify: só serve para
-# disparar um build deste site, nao dá acesso à conta.
+# Corre a cada push na branch main:
+#   1. instala as dependencias
+#   2. compila o site (exportacao estatica para a pasta out/)
+#   3. publica a pasta out/ na Netlify
+#
+# Assim o que fica no ar e sempre exactamente o codigo deste repositorio.
+# O token da Netlify fica guardado como segredo encriptado (Settings > Secrets).
 
 on:
   push:
     branches: [main]
-  workflow_dispatch: # permite disparar à mão no separador Actions
+  workflow_dispatch: # permite disparar a mao no separador Actions
 
 jobs:
   publicar:
-    name: Disparar publicacao
+    name: Compilar e publicar
     runs-on: ubuntu-latest
+
     steps:
-      - name: Acionar build na Netlify
+      - name: Obter o codigo
+        uses: actions/checkout@v4
+
+      - name: Preparar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar o pnpm
+        run: npm install -g pnpm@11
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Compilar o site
+        run: pnpm build:static
+        env:
+          NEXT_PUBLIC_SITE_URL: https://falcaoobras.pt
+
+      - name: Confirmar que a pasta out foi gerada
         run: |
-          echo "A pedir publicacao à Netlify..."
-          curl --fail --silent --show-error \
-            --retry 3 --retry-delay 5 \
-            -X POST "https://api.netlify.com/build_hooks/6af61a1c4f003cd8080cee7e"
-          echo ""
-          echo "Pedido aceite. O site fica atualizado em cerca de 1 minuto."
+          test -f out/index.html || { echo "ERRO: out/index.html nao existe"; exit 1; }
+          echo "Ficheiros gerados: $(find out -type f | wc -l)"
+
+      - name: Publicar na Netlify
+        run: |
+          pnpm exec netlify deploy \
+            --prod \
+            --no-build \
+            --dir=out \
+            --site "7165f995-aab9-45a8-a266-8d5f181f1bfc" \
+            --message "Deploy automatico do commit ${{ github.sha }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_CLI_DISABLE_TELEMETRY: '1'
+
+      - name: Verificar o site publicado
+        run: |
+          sleep 10
+          echo "A verificar https://falcaoobras.pt ..."
+          curl --fail --silent --show-error --location --max-time 60 \
+            https://falcaoobras.pt/ --output /tmp/site.html
+          TAMANHO=$(wc -c < /tmp/site.html)
+          echo "Recebidos $TAMANHO bytes"
+          grep -q "falcaoobraspt@gmail.com" /tmp/site.html \
+            && echo "OK: email correcto no site" \
+            || { echo "ERRO: email nao encontrado"; exit 1; }
+          echo "Publicacao verificada com sucesso."
