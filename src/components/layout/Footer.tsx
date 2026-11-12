@@ -1,11 +1,10 @@
-﻿'use client';
+'use client';
 
 import {
   ArrowUp,
   Facebook,
   Instagram,
   Linkedin,
-  Mail,
   MapPin,
   Phone,
   Clock,
@@ -15,7 +14,6 @@ import {
   COMPANY,
   SERVICE_IDS,
   SECTION_IDS,
-  mailHref,
   mapsHref,
   telHref,
   whatsappHref,
@@ -136,15 +134,6 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href={mailHref()}
-                  className="inline-flex items-start gap-3 text-graphite-400 transition-colors hover:text-gold-300"
-                >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true" />
-                  {COMPANY.email}
-                </a>
-              </li>
               <li>
                 <a
                   href={mapsHref()}

@@ -9,6 +9,10 @@ export const COMPANY = {
   tagline: 'Olho de falcão, mão de profissional.',
   /** Endereço público do site (usado em SEO, partilha e dados estruturados). */
   siteUrl: 'https://falcaoobras.pt',
+  /**
+   * E-mail institucional: mantido apenas para uso interno/SEO.
+   * NÃO é exibido no site (caixa de correio ainda não criada).
+   */
   email: 'geral@falcaoobras.pt',
   /** Números exibidos no site (formato nacional). */
   phones: [
@@ -47,10 +51,12 @@ export const whatsappHref = (message: string = WHATSAPP_MESSAGE, index = 0) =>
 
 export const telHref = (index = 0) => `tel:+${COMPANY.phones[index].raw}`;
 
-export const mailHref = (subject?: string) =>
-  subject
-    ? `mailto:${COMPANY.email}?subject=${encodeURIComponent(subject)}`
-    : `mailto:${COMPANY.email}`;
+/**
+ * O contacto é feito apenas por telefone e WhatsApp.
+ * O e-mail institucional não é divulgado (caixa ainda não criada),
+ * por isso não há helper de `mailto:` — evita mostrar um endereço inexistente.
+ */
+export const whatsappMessageFor = (texto: string) => whatsappHref(texto);
 
 export const mapsHref = () => {
   const q = encodeURIComponent(

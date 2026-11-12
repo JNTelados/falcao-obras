@@ -1,8 +1,8 @@
 'use client';
 
-import { Car, Clock, ExternalLink, Mail, MapPin, Navigation, Phone } from 'lucide-react';
+import { Car, Clock, ExternalLink, MapPin, Navigation, Phone } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nProvider';
-import { COMPANY, mailHref, mapsEmbedSrc, mapsHref, telHref } from '@/lib/site';
+import { COMPANY, mapsEmbedSrc, mapsHref, telHref } from '@/lib/site';
 import { EASE } from '@/lib/motion';
 import { Container, Section } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -139,20 +139,6 @@ export function Location() {
                     </a>
                   </li>
                 ))}
-                <li>
-                  <a
-                    href={mailHref()}
-                    className="group flex items-center justify-between gap-4 rounded-2xl bg-white/[0.05] px-4 py-3.5 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400/12 hover:ring-gold-400/25"
-                  >
-                    <span className="flex flex-col">
-                      <span className="text-sm font-medium text-white">{COMPANY.email}</span>
-                      <span className="text-2xs uppercase tracking-[0.16em] text-graphite-400">
-                        {t.contact.emailTitle}
-                      </span>
-                    </span>
-                    <Mail className="h-4 w-4 text-gold-300" aria-hidden="true" />
-                  </a>
-                </li>
               </ul>
             </div>
 
