@@ -94,6 +94,7 @@ Depois, atualize o endereço no projeto para o SEO ficar correto:
 | Ver o site no PC | `pnpm dev` → http://localhost:3210 |
 | Gerar versão de produção local | `pnpm build` e depois `pnpm start` |
 | Gerar pasta para publicar à mão | duplo clique em `gerar-site-publicar.bat` |
+| Reinstalar Git e cloudflared | duplo clique em `instalar-ferramentas.bat` |
 | Verificar tipos | `pnpm typecheck` |
 | Verificar layout e idiomas | `pnpm verify:layout` e `pnpm verify:i18n` |
 | Publicar (modo definitivo) | `git add -A`, `git commit -m "ajustes"`, `git push` |
@@ -113,10 +114,16 @@ Depois, atualize o endereço no projeto para o SEO ficar correto:
 
 ## Observações úteis
 
-- **A pasta `tools/`** (Git portátil + cloudflared) **não vai para o GitHub** —
-  foi baixada só para esta máquina. Se apagar o projeto, terá de baixar de novo.
+- **A pasta `tools/` não vai para o GitHub** (são ~145 MB de programas prontos:
+  Git portátil + cloudflared). Se apagar ou mover o projeto, **não precisa baixar nada
+  à mão**: duplo clique em **`instalar-ferramentas.bat`** que ele baixa tudo de novo,
+  em qualquer computador.
+- **Se preferir o Git normal** (recomendado para o dia a dia), instale com:
+  ```powershell
+  winget install Git.Git
+  ```
+  Assim passa a ter o comando `git` disponível em qualquer pasta.
 - **O link temporário** `https://discretion-nurses-massive-illustrations.trycloudflare.com`
   morre quando o PC ou a sessão terminarem. Serve só para testes rápidos.
-- **O código está salvo apenas neste computador** até fazer o Passo 2 (enviar para
-  o GitHub). Recomendo não deixar isso para muito tarde, como cópia de segurança.
+- **O código está no GitHub:** https://github.com/JNTelados/falcao-obras
 - O site é **100% estático**: não precisa de servidor, base de dados nem manutenção.
