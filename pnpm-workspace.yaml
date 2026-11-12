@@ -9,7 +9,10 @@
 # otimizados (images.unoptimized: true), mas o install falha se o script for
 # ignorado — por isso autorizamos explicitamente.
 allowBuilds:
+  esbuild: true
+  netlify-cli: true
   sharp: true
+  unix-dgram: true
 
 # Não revalida dependências antes de cada script, evitando o bloqueio
 # do install em ambientes de CI.

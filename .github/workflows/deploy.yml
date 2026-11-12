@@ -1,0 +1,24 @@
+name: Publicar site na Netlify
+
+# Publica automaticamente sempre que houver push na branch main.
+# O "build hook" abaixo e um endereco aleatorio da Netlify: só serve para
+# disparar um build deste site, nao dá acesso à conta.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permite disparar à mão no separador Actions
+
+jobs:
+  publicar:
+    name: Disparar publicacao
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acionar build na Netlify
+        run: |
+          echo "A pedir publicacao à Netlify..."
+          curl --fail --silent --show-error \
+            --retry 3 --retry-delay 5 \
+            -X POST "https://api.netlify.com/build_hooks/6af61a1c4f003cd8080cee7e"
+          echo ""
+          echo "Pedido aceite. O site fica atualizado em cerca de 1 minuto."

@@ -30,3 +30,7 @@ tsconfig.tsbuildinfo
 # Rascunhos de verificação
 scripts/shots/
 scripts/_*.png
+
+# Local Netlify folder
+.netlify
+tools/deploy.zip
