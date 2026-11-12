@@ -1,73 +1,72 @@
-"""Gera a imagem Open Graph (1200x630) a partir da marca Falcao."""
-from PIL import Image, ImageDraw, ImageFont
+"""Gera a imagem Open Graph (1200x630) com o dominio proprio."""
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 
 OUT = r'C:\rea\falcao-site\public\og-image.png'
 BRAND = r'C:\rea\falcao-site\public\brand'
 W, H = 1200, 630
+DOMINIO = 'falcaoobras.pt'
+TELEFONES = '936 628 585   ·   924 108 625'
 
-FONT_CANDIDATES = [
-    r'C:\Windows\Fonts\segoeuib.ttf',
-    r'C:\Windows\Fonts\arialbd.ttf',
-    r'C:\Windows\Fonts\seguisb.ttf',
-    r'C:\Windows\Fonts\arial.ttf',
-]
-FONT_LIGHT = [r'C:\Windows\Fonts\segoeui.ttf', r'C:\Windows\Fonts\arial.ttf']
+FONT_BOLD = [r'C:\Windows\Fonts\segoeuib.ttf', r'C:\Windows\Fonts\arialbd.ttf', r'C:\Windows\Fonts\seguisb.ttf']
+FONT_REG = [r'C:\Windows\Fonts\segoeui.ttf', r'C:\Windows\Fonts\arial.ttf']
 
 
-def load(candidates, size):
-    for path in candidates:
-        if os.path.exists(path):
+def fonte(candidatos, tamanho):
+    for caminho in candidatos:
+        if os.path.exists(caminho):
             try:
-                return ImageFont.truetype(path, size)
+                return ImageFont.truetype(caminho, tamanho)
             except OSError:
                 continue
     return ImageFont.load_default()
 
 
-canvas = Image.new('RGB', (W, H), (14, 16, 20))
-d = ImageDraw.Draw(canvas, 'RGBA')
+base = Image.new('RGB', (W, H), (14, 16, 20))
+desenho = ImageDraw.Draw(base, 'RGBA')
 
-# grade tecnica
 for x in range(0, W, 52):
-    d.line([(x, 0), (x, H)], fill=(255, 255, 255, 8))
+    desenho.line([(x, 0), (x, H)], fill=(255, 255, 255, 8))
 for y in range(0, H, 52):
-    d.line([(0, y), (W, y)], fill=(255, 255, 255, 8))
+    desenho.line([(0, y), (W, y)], fill=(255, 255, 255, 8))
 
-# brilhos de cor
-glow = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-gd = ImageDraw.Draw(glow, 'RGBA')
-gd.ellipse([-260, -300, 520, 220], fill=(223, 174, 51, 62))
-gd.ellipse([820, 380, 1500, 900], fill=(37, 154, 166, 48))
-glow = glow.filter(__import__('PIL.ImageFilter', fromlist=['ImageFilter']).GaussianBlur(120))
-canvas = Image.alpha_composite(canvas.convert('RGBA'), glow).convert('RGB')
-d = ImageDraw.Draw(canvas, 'RGBA')
+brilho = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+bd = ImageDraw.Draw(brilho, 'RGBA')
+bd.ellipse([-260, -320, 520, 200], fill=(223, 174, 51, 64))
+bd.ellipse([820, 380, 1500, 900], fill=(37, 154, 166, 50))
+brilho = brilho.filter(ImageFilter.GaussianBlur(120))
+base = Image.alpha_composite(base.convert('RGBA'), brilho).convert('RGB')
+desenho = ImageDraw.Draw(base, 'RGBA')
 
-# linha dourada superior
-d.line([(70, 1), (W - 70, 1)], fill=(223, 174, 51, 170), width=2)
+desenho.line([(70, 1), (W - 70, 1)], fill=(223, 174, 51, 170), width=2)
 
-# emblema
-emblem = Image.open(os.path.join(BRAND, 'emblem.png'))
-scale = 300 / emblem.height
-emblem = emblem.resize((round(emblem.width * scale), 300), Image.LANCZOS)
-canvas.paste(emblem, (86, 96), emblem)
+emblema = Image.open(os.path.join(BRAND, 'emblem.png')).convert('RGBA')
+escala = 300 / emblema.height
+emblema = emblema.resize((round(emblema.width * escala), 300), Image.LANCZOS)
+base.paste(emblema, (86, 96), emblema)
 
-# texto
 x = 470
-d.text((x, 118), 'FALCAO', font=load(FONT_CANDIDATES, 74), fill=(238, 241, 245))
-d.text((x, 202), 'OBRAS & REMODELACOES', font=load(FONT_LIGHT, 25), fill=(223, 174, 51))
+desenho.text((x, 112), 'FALCAO', font=fonte(FONT_BOLD, 72), fill=(240, 243, 247))
+desenho.text((x, 194), 'OBRAS & REMODELACOES', font=fonte(FONT_REG, 24), fill=(223, 174, 51))
 
-title_font = load(FONT_CANDIDATES, 40)
-d.text((x, 274), 'Gas  •  Aguas & Esgotos', font=title_font, fill=(226, 232, 240))
-d.text((x, 324), 'Remodelacoes  •  Pinturas', font=title_font, fill=(226, 232, 240))
+# endereco proprio em destaque
+desenho.text((x, 258), DOMINIO, font=fonte(FONT_BOLD, 42), fill=(223, 174, 51))
 
-d.text((x, 402), 'Tecnicos certificados  ·  Orcamento gratuito', font=load(FONT_LIGHT, 24), fill=(148, 163, 184))
-d.text((x, 440), 'Garantia por escrito  ·  Emergencia 24h', font=load(FONT_LIGHT, 24), fill=(148, 163, 184))
+linha = 336
+desenho.text((x, linha), 'Gas  ·  Aguas & Esgotos', font=fonte(FONT_BOLD, 33), fill=(228, 233, 240))
+desenho.text((x, linha + 46), 'Remodelacoes  ·  Pinturas', font=fonte(FONT_BOLD, 33), fill=(228, 233, 240))
 
-# rodape com telefones
-d.line([(86, 528), (W - 86, 528)], fill=(255, 255, 255, 28), width=1)
-d.text((86, 552), '936 628 585   ·   924 108 625', font=load(FONT_CANDIDATES, 27), fill=(255, 255, 255))
-d.text((W - 430, 556), 'Olho de falcao, mao de profissional.', font=load(FONT_LIGHT, 21), fill=(223, 174, 51))
+desenho.text((x, 452), 'Tecnicos certificados  ·  Orcamento gratuito', font=fonte(FONT_REG, 22), fill=(150, 164, 184))
+desenho.text((x, 484), 'Garantia por escrito  ·  Emergencia 24h', font=fonte(FONT_REG, 22), fill=(150, 164, 184))
 
-canvas.save(OUT, 'PNG', optimize=True)
-print('og-image.png', canvas.size, os.path.getsize(OUT), 'B')
+desenho.line([(86, 534), (W - 86, 534)], fill=(255, 255, 255, 30), width=1)
+desenho.text((86, 556), TELEFONES, font=fonte(FONT_BOLD, 26), fill=(255, 255, 255))
+desenho.text((W - 452, 560), 'Olho de falcao, mao de profissional.', font=fonte(FONT_REG, 20), fill=(223, 174, 51))
+
+base_entregar = base.copy()
+base.save(OUT + '.tmp.png', 'PNG', optimize=True)
+antes = os.path.getsize(OUT + '.tmp.png')
+os.remove(OUT + '.tmp.png')
+# quantiza para reduzir peso mantendo boa qualidade
+base_entregar.convert('RGB').quantize(colors=256, method=Image.MEDIANCUT).save(OUT, 'PNG', optimize=True)
+print(f'og-image.png {base_entregar.size}  {antes:,} -> {os.path.getsize(OUT):,} B')

@@ -18,7 +18,7 @@ const siteUrl =
   process.argv[2] ??
   process.env.NEXT_PUBLIC_SITE_URL ??
   process.env.URL ?? // a Netlify injeta URL com o endereco do site
-  'https://falcao.netlify.app';
+  'https://www.falcaoobras.pt';
 
 const cwd = process.cwd();
 

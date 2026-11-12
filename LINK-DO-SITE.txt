@@ -1,37 +1,38 @@
-FALCAO OBRAS & REMODELACOES - ENDERECOS DE ACESSO
-==================================================
+FALCAO OBRAS & REMODELACOES
+===========================
 
-PARA PUBLICAR O SITE NO AR (passo a passo completo):
-  -> Leia o arquivo  PUBLICAR.md  nesta mesma pasta
+DOMINIO PROPRIO:  https://www.falcaoobras.pt
+(comprado na one.com - veja o passo a passo em DOMINIO.md)
 
-
-ENDERECOS ENQUANTO O SITE RODA NESTE COMPUTADOR
------------------------------------------------
-Neste computador:
-  http://localhost:3210        (modo desenvolvimento: pnpm dev)
-  http://localhost:8080        (versao estatica, se usar o serve)
-
-Telemoveis (temporario - so enquanto o tunel estiver ligado):
-  https://discretion-nurses-massive-illustrations.trycloudflare.com
-
-Rede local (precisa liberar o firewall - ver PUBLICAR.md):
-  http://192.168.1.173:3210
+CODIGO NO GITHUB:
+  https://github.com/JNTelados/falcao-obras
 
 
-DEPOIS DE PUBLICAR (recomendado - endereco fixo e gratis)
----------------------------------------------------------
-  1. Duplo clique em:  gerar-site-publicar.bat
-  2. Abra:  https://app.netlify.com/drop
-  3. Arraste a pasta  out  para dentro da pagina
-  4. Crie a conta gratuita e renomeie o site para:  falcao
-  Resultado:  https://falcao.netlify.app
-
-Para que a publicacao seja automatica a cada alteracao, siga a
-"Opcao B" do arquivo PUBLICAR.md (GitHub + Netlify).
+PARA O SITE FICAR NO AR (falta este passo - 2 minutos)
+------------------------------------------------------
+  1. Abra: https://app.netlify.com/start/deploy?repository=https://github.com/JNTelados/falcao-obras
+  2. Entre com a conta GitHub e autorize
+  3. Confirme: build "pnpm build:static" | publish "out"
+  4. Clique em Deploy
+  5. Depois ligue o dominio (passo a passo em DOMINIO.md)
 
 
-COMO COLOCAR O SITE A RODAR NOVAMENTE
--------------------------------------
+GUIAS
+-----
+  DOMINIO.md    -> ligar falcaoobras.pt a Netlify (DNS da one.com explicado)
+  PUBLICAR.md   -> como publicar e atualizar o site (guia geral)
+  README.md     -> como o projeto esta organizado
+
+
+NO SEU COMPUTADOR
+-----------------
   cd C:\rea\falcao-site
-  pnpm dev            (para desenvolver e ver em localhost:3210)
-  pnpm build:static   (para gerar a pasta out pronta a publicar)
+  pnpm dev              -> http://localhost:3210
+  pnpm build:static     -> gera a pasta out pronta a publicar
+  node scripts\verificar-dominio.mjs falcaoobras.pt   -> checa o DNS
+
+
+VERIFICAR SE O DOMINIO JA PROPAGOU
+----------------------------------
+  node scripts\verificar-dominio.mjs falcaoobras.pt
+  (deve mostrar os IPs da Netlify: 75.2.60.5 e 99.83.190.102)

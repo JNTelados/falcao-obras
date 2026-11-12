@@ -9,8 +9,16 @@
   NODE_VERSION = "22"
   # pnpm é ativado via corepack (evita falha de "pnpm: command not found")
   NETLIFY_USE_PNPM = "true"
-  # Troque aqui quando tiver um domínio próprio (ex.: https://www.falcaoobras.pt)
-  NEXT_PUBLIC_SITE_URL = "https://falcao.netlify.app"
+  # Domínio próprio (canonical, Open Graph, sitemap)
+  NEXT_PUBLIC_SITE_URL = "https://www.falcaoobras.pt"
+
+# Endereço canónico é o www: quem digitar sem www é encaminhado para lá
+# (evita conteúdo duplicado na indexação do Google).
+[[redirects]]
+  from = "https://falcaoobras.pt/*"
+  to = "https://www.falcaoobras.pt/:splat"
+  status = 301
+  force = true
 
 # Os ficheiros do Next.js têm hash no nome: podem ser cacheados para sempre.
 [[headers]]

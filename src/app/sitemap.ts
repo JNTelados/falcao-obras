@@ -1,10 +1,10 @@
 import type { MetadataRoute } from 'next';
-import { SECTION_IDS } from '@/lib/site';
+import { COMPANY, SECTION_IDS } from '@/lib/site';
 
 // Necessário para o modo de exportação estática (`EXPORT=1`).
 export const dynamic = 'force-static';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.falcaoobras.pt';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? COMPANY.siteUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

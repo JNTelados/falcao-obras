@@ -23,7 +23,7 @@ const jakarta = Plus_Jakarta_Sans({
   adjustFontFallback: true,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.falcaoobras.pt';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? COMPANY.siteUrl;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

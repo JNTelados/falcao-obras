@@ -5,7 +5,7 @@ import { COMPANY, whatsappHref } from '@/lib/site';
  * Ajuda o Google a exibir telefone, endereço, horários e avaliações.
  */
 export function StructuredData() {
-  const url = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.falcaoobras.pt';
+  const url = process.env.NEXT_PUBLIC_SITE_URL ?? COMPANY.siteUrl;
 
   const data = {
     '@context': 'https://schema.org',
