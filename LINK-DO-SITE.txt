@@ -1,46 +1,37 @@
 FALCAO OBRAS & REMODELACOES - ENDERECOS DE ACESSO
 ==================================================
 
-TELEMOVEIS (qualquer rede, qualquer operadora):
+PARA PUBLICAR O SITE NO AR (passo a passo completo):
+  -> Leia o arquivo  PUBLICAR.md  nesta mesma pasta
+
+
+ENDERECOS ENQUANTO O SITE RODA NESTE COMPUTADOR
+-----------------------------------------------
+Neste computador:
+  http://localhost:3210        (modo desenvolvimento: pnpm dev)
+  http://localhost:8080        (versao estatica, se usar o serve)
+
+Telemoveis (temporario - so enquanto o tunel estiver ligado):
   https://discretion-nurses-massive-illustrations.trycloudflare.com
 
-NESTE COMPUTADOR:
-  http://localhost:3210
-
-REDE LOCAL (so funciona depois de liberar o firewall - ver abaixo):
+Rede local (precisa liberar o firewall - ver PUBLICAR.md):
   http://192.168.1.173:3210
 
 
-COMO COLOCAR O SITE NO AR NOVAMENTE
------------------------------------
-Abra o PowerShell na pasta do projeto e rode:
+DEPOIS DE PUBLICAR (recomendado - endereco fixo e gratis)
+---------------------------------------------------------
+  1. Duplo clique em:  gerar-site-publicar.bat
+  2. Abra:  https://app.netlify.com/drop
+  3. Arraste a pasta  out  para dentro da pagina
+  4. Crie a conta gratuita e renomeie o site para:  falcao
+  Resultado:  https://falcao.netlify.app
 
+Para que a publicacao seja automatica a cada alteracao, siga a
+"Opcao B" do arquivo PUBLICAR.md (GitHub + Netlify).
+
+
+COMO COLOCAR O SITE A RODAR NOVAMENTE
+-------------------------------------
   cd C:\rea\falcao-site
-  pnpm build
-  pnpm start
-
-Para gerar um NOVO link publico (o anterior muda a cada reinicio):
-
-  C:\rea\falcao-site\tools\cloudflared.exe tunnel --url http://localhost:3210
-
-O link novo aparece no meio das mensagens, procure a linha parecida com:
-  |  https://algum-nome-aleatorio.trycloudflare.com  |
-
-
-LIBERAR O ACESSO PELO WI-FI LOCAL (opcional)
---------------------------------------------
-Precisa de permissao de administrador:
-
-  1. Duplo clique em:  abrir-para-celular.bat
-  2. Clique em "Sim" na janela do Windows
-
-Ou, no PowerShell como Administrador:
-
-  New-NetFirewallRule -DisplayName "Falcao Site 3210 (TCP-In)" -Direction Inbound -Protocol TCP -LocalPort 3210 -Action Allow -Profile Private
-
-
-OBSERVACOES
------------
-- O link trycloudflare e temporario: cai quando o tunel ou o servidor param.
-- Qualquer pessoa com o link consegue ver o site (nao tem palavra-passe).
-- Para um endereco fixo e definitivo, publique em Netlify ou Vercel.
+  pnpm dev            (para desenvolver e ver em localhost:3210)
+  pnpm build:static   (para gerar a pasta out pronta a publicar)
