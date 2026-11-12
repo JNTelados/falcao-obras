@@ -3,16 +3,20 @@
 Site de página única, responsivo e bilíngue (**PT-BR padrão + EN**), construído com
 Next.js (App Router), React, TypeScript, Tailwind CSS e Framer Motion.
 
+- **Repositório:** https://github.com/JNTelados/falcao-obras
+- **Publicação:** [PUBLICAR.md](./PUBLICAR.md) (guia completo em português)
+
 ---
 
 ## Como rodar
 
 ```bash
 pnpm install
-pnpm dev        # http://localhost:3210
-pnpm build      # build de produção
-pnpm start      # serve o build em http://localhost:3210
-pnpm typecheck  # verificação de tipos
+pnpm dev             # http://localhost:3210
+pnpm build           # build de produção
+pnpm start           # serve o build em http://localhost:3210
+pnpm build:static    # gera a pasta out/ pronta a publicar (Netlify, Vercel, Pages)
+pnpm typecheck       # verificação de tipos
 ```
 
 > O projeto usa **pnpm** (há `pnpm-workspace.yaml` com `verifyDepsBeforeRun: false`,

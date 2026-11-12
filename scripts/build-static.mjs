@@ -4,37 +4,59 @@
  * Uso:
  *   node scripts/build-static.mjs
  *   node scripts/build-static.mjs https://meudominio.pt
+ *   pnpm build:static
  *
  * Gera a pasta `out/` com o endereco publico correto no SEO.
+ * Nao depende de `node` nem de `next` estarem no PATH.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
 const siteUrl =
   process.argv[2] ??
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.URL || 'https://falcao.netlify.app');
+  process.env.URL ?? // a Netlify injeta URL com o endereco do site
+  'https://falcao.netlify.app';
 
 const cwd = process.cwd();
+
 console.log(`\n>> Gerando site estatico para: ${siteUrl}\n`);
 
-const nextBin = path.join(
-  cwd,
-  'node_modules',
-  '.bin',
-  process.platform === 'win32' ? 'next.CMD' : 'next',
-);
+/** Localiza a CLI do Next sem depender do PATH (funciona com pnpm e com npm). */
+function resolverNextCli() {
+  const candidatos = [
+    path.join(cwd, 'node_modules', 'next', 'dist', 'bin', 'next'),
+    path.join(cwd, 'node_modules', '.bin', 'next'),
+  ];
+  for (const c of candidatos) {
+    if (existsSync(c)) return c;
+  }
+  // Ultimo recurso: dentro do store do pnpm (.pnpm/next@x/node_modules/next/...)
+  const pnpmDir = path.join(cwd, 'node_modules', '.pnpm');
+  if (existsSync(pnpmDir)) {
+    const entrada = readdirSync(pnpmDir).find((n) => n.startsWith('next@'));
+    if (entrada) {
+      const p = path.join(pnpmDir, entrada, 'node_modules', 'next', 'dist', 'bin', 'next');
+      if (existsSync(p)) return p;
+    }
+  }
+  return null;
+}
 
-if (!existsSync(nextBin)) {
-  console.error('[erro] Next.js nao encontrado em node_modules. Rode antes: pnpm install');
+const nextCli = resolverNextCli();
+
+if (!nextCli) {
+  console.error('[erro] Next.js nao encontrado. Rode antes: pnpm install');
   process.exit(1);
 }
 
-const resultado = spawnSync(nextBin, ['build'], {
+console.log(`   Next CLI: ${nextCli}`);
+
+const resultado = spawnSync(process.execPath, [nextCli, 'build'], {
   stdio: 'inherit',
-  shell: process.platform === 'win32',
+  cwd,
   env: {
     ...process.env,
     NEXT_PUBLIC_SITE_URL: siteUrl,

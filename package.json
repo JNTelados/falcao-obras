@@ -2,6 +2,10 @@
   "name": "falcao-obras-remodelacoes",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.28.5",
+  "engines": {
+    "node": ">=20"
+  },
   "description": "Site institucional da Falcão Obras & Remodelações — gás, águas e esgotos, remodelações e pinturas.",
   "scripts": {
     "dev": "next dev -p 3210",

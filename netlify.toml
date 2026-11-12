@@ -7,6 +7,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # pnpm é ativado via corepack (evita falha de "pnpm: command not found")
+  NETLIFY_USE_PNPM = "true"
   # Troque aqui quando tiver um domínio próprio (ex.: https://www.falcaoobras.pt)
   NEXT_PUBLIC_SITE_URL = "https://falcao.netlify.app"
 
