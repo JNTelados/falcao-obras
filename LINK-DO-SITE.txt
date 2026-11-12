@@ -24,12 +24,17 @@ GUIAS
   README.md     -> como o projeto esta organizado
 
 
-NO SEU COMPUTADOR
------------------
-  cd C:\rea\falcao-site
-  pnpm dev              -> http://localhost:3210
-  pnpm build:static     -> gera a pasta out pronta a publicar
-  node scripts\verificar-dominio.mjs falcaoobras.pt   -> checa o DNS
+NO SEU COMPUTADOR (duplo clique, sem precisar de comandos)
+----------------------------------------------------------
+  iniciar-site.bat          -> abre o site em http://localhost:3210
+  gerar-site-publicar.bat   -> gera a pasta out pronta a publicar
+  publicar-alteracoes.bat   -> envia as alteracoes para o GitHub
+  instalar-ferramentas.bat  -> baixa Git e cloudflared (se apagar o projeto)
+
+  IMPORTANTE: o node e o pnpm NAO estao no PATH deste computador, por isso
+  comandos escritos no PowerShell (ex.: "pnpm build:static") dao erro
+  "nao e reconhecido como nome de cmdlet". Os ficheiros .bat acima
+  encontram o Node e o Git sozinhos e configuram tudo antes de rodar.
 
 
 VERIFICAR SE O DOMINIO JA PROPAGOU

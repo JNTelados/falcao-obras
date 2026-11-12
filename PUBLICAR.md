@@ -89,15 +89,20 @@ Depois, atualize o endereço no projeto para o SEO ficar correto:
 
 ## Comandos do dia a dia
 
-| O que quer fazer | Comando / ação |
+| O que quer fazer | Como fazer |
 |---|---|
-| Ver o site no PC | `pnpm dev` → http://localhost:3210 |
-| Gerar versão de produção local | `pnpm build` e depois `pnpm start` |
-| Gerar pasta para publicar à mão | duplo clique em `gerar-site-publicar.bat` |
+| **Ver o site no PC** | duplo clique em `iniciar-site.bat` |
+| **Gerar a pasta `out` para publicar** | duplo clique em `gerar-site-publicar.bat` |
+| **Publicar alterações no GitHub** | duplo clique em `publicar-alteracoes.bat` |
 | Reinstalar Git e cloudflared | duplo clique em `instalar-ferramentas.bat` |
 | Verificar tipos | `pnpm typecheck` |
 | Verificar layout e idiomas | `pnpm verify:layout` e `pnpm verify:i18n` |
-| Publicar (modo definitivo) | `git add -A`, `git commit -m "ajustes"`, `git push` |
+
+> **Importante:** o `node` e o `pnpm` **não estão no PATH** deste computador,
+> por isso comandos digitados no PowerShell (como `pnpm build:static`) dão
+> "não é reconhecido como nome de cmdlet".
+> Os ficheiros `.bat` acima resolvem isso sozinhos: eles encontram o Node e o
+> Git e configuram tudo antes de executar.
 
 ---
 
